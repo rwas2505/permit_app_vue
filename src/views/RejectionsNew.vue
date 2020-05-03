@@ -58,17 +58,17 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      category: "",
-      sub_category: "",
-      product: "",
-      office: "",
-      state: "",
-      ahj: "",
-      note: "",
-      installation: "",
-      level_reviewed: "",
-      rejection_source: "",
-      corrections_uploaded: ""
+      category: "default category",
+      sub_category: "default sub_category",
+      product: "default product",
+      office: "default office",
+      state: "default state",
+      ahj: "default ahj",
+      note: "default note",
+      installation: "default installation",
+      level_reviewed: "default level_reviewed",
+      rejection_source: "default rejection_source",
+      corrections_uploaded: "default corrections_uploaded"
     };
   },
   methods: {
