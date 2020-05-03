@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="rejections-index">
     <h1>{{ message }}</h1>
     <div v-for="rejection in rejections">
       <p>id: {{ rejection.id }}</p>

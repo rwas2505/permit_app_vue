@@ -4,47 +4,47 @@
       <form v-on:submit.prevent="submit()">
         <h1>New Permit Rejection Entry</h1>
         <div class="form-group">
-          category: <input placeholder="testtttt" type="text" class="form-control" v-model="category">
+          category: <input type="text" class="form-control" v-model="category">
           <hr>
         </div>
         <div class="form-group">
-          sub_category: <input placeholder="testtttt" type="text" class="form-control" v-model="sub_category">
+          sub_category: <input type="text" class="form-control" v-model="sub_category">
           <hr>
         </div>
         <div class="form-group">
-          product: <input placeholder="testtttt" type="text" class="form-control" v-model="product">
+          product: <input type="text" class="form-control" v-model="product">
           <hr>
         </div>
         <div class="form-group">
-          office: <input placeholder="testtttt" type="text" class="form-control" v-model="office">
+          office: <input type="text" class="form-control" v-model="office">
           <hr>
         </div>
         <div class="form-group">
-          state: <input placeholder="testtttt" type="text" class="form-control" v-model="state">
+          state: <input type="text" class="form-control" v-model="state">
           <hr>
         </div>
         <div class="form-group">
-          ahj: <input placeholder="testtttt" type="text" class="form-control" v-model="ahj">
+          ahj: <input type="text" class="form-control" v-model="ahj">
           <hr>
         </div>
         <div class="form-group">
-          note: <input placeholder="testtttt" type="text" class="form-control" v-model="note">
+          note: <input type="text" class="form-control" v-model="note">
           <hr>
         </div>
         <div class="form-group">
-          installation: <input placeholder="testtttt" type="text" class="form-control" v-model="installation">
+          installation: <input type="text" class="form-control" v-model="installation">
           <hr>
         </div>
         <div class="form-group">
-          level_reviewed: <input placeholder="testtttt" type="text" class="form-control" v-model="level_reviewed">
+          level_reviewed: <input type="text" class="form-control" v-model="level_reviewed">
           <hr>
         </div>
         <div class="form-group">
-          rejection_source: <input placeholder="testtttt" type="text" class="form-control" v-model="rejection_source">
+          rejection_source: <input type="text" class="form-control" v-model="rejection_source">
           <hr>
         </div>
         <div class="form-group">
-          corrections_uploaded: <input placeholder="testtttt" type="text" class="form-control" v-model="corrections_uploaded">
+          corrections_uploaded: <input type="text" class="form-control" v-model="corrections_uploaded">
           <hr>
         </div>
         <input type="submit" class="btn btn-primary" value="Submit">
@@ -65,7 +65,7 @@ export default {
       state: "default state",
       ahj: "default ahj",
       note: "default note",
-      installation: "default installation",
+      installation: 123456,
       level_reviewed: "default level_reviewed",
       rejection_source: "default rejection_source",
       corrections_uploaded: "default corrections_uploaded"

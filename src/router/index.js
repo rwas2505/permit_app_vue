@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import RejectionsIndex from '../views/RejectionsIndex.vue';
 import RejectionsNew from '../views/RejectionsNew.vue';
+import RejectionsShow from '../views/RejectionsShow.vue';
+import RejectionsEdit from '../views/RejectionsEdit.vue';
 
 Vue.use(VueRouter)
 
@@ -29,6 +31,16 @@ const routes = [
     path: '/rejections/new',
     name: 'rejections-new',
     component: RejectionsNew
+  },
+  {
+    path: '/rejections/:id',
+    name: 'rejections-show',
+    component: RejectionsShow
+  },
+  {
+    path: '/rejections/:id/edit',
+    name: 'rejections-edit',
+    component: RejectionsEdit
   }
 ];
 
