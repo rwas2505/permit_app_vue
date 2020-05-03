@@ -2,7 +2,7 @@
   <div class="rejections-index">
     <h1>{{ message }}</h1>
     <div v-for="rejection in rejections">
-      <p>id: {{ rejection.id }}</p>
+      <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
       <p>installation: {{ rejection.installation }}</p>
       <p>category: {{ rejection.category }}</p>
       <p>sub_category: {{ rejection.sub_category }}</p>

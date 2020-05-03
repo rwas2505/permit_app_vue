@@ -47,7 +47,15 @@
           corrections_uploaded: <input type="text" class="form-control" v-model="rejection.corrections_uploaded">
           <hr>
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <div>
+          <input type="submit" class="btn btn-success" value="Submit"> |
+          <a class="btn btn-warning" v-bind:href="`/rejections/${rejection.id}`" role="button">Cancel </a> |
+          <button class="btn btn-danger" v-on:click="deleteRejection()">Delete</button>
+        </div>
+        <hr>
+        <div>
+        </div>
+        
       </form>
     </div>
   </div>
@@ -97,6 +105,13 @@ export default {
           this.errors = error.response.data.errors;
           console.log(this.errors)
         });
+    },
+    deleteRejection: function() {
+      console.log("deleting the rejection...");
+      axios.delete(`/api/rejections/${this.rejection.id}`).then(response => {
+        console.log(response.data);
+        this.$router.push('/rejections');
+      });
     }
   }
 };

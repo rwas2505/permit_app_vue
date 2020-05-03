@@ -2,6 +2,7 @@
   <div class="rejections-show">
     <h1>{{ message }}</h1>
     <h1>{{ rejection }}</h1>
+    <a class="btn btn-primary" v-bind:href="`/rejections/${rejection.id}/edit`" role="button">Edit </a>
   </div>
 </template>
 
