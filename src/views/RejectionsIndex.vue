@@ -1,7 +1,77 @@
 <template>
   <div class="rejections-index">
+    
     <h1>{{ message }}</h1>
-    <input v-model="searchCategory">
+    
+    <!-- <input v-model="searchCategory"> -->
+    <button v-on:click="filter()" type="button" class="btn btn-outline-secondary">Filter Options</button>
+    <div v-if="showFilter">
+      <ul class="nav justify-content-center">
+        <form>
+          <div class="form-row">
+            <div class="col">
+              <label for="exampleFormControlSelect1">Category</label>
+              <select class="form-control" id="categorySelect">
+                <option></option>
+                <option v-for="category in categories">{{ category }}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="exampleFormControlSelect1">Sub Category</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option></option>
+                <option>try to only display sub categories that match category?</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="exampleFormControlSelect1">Product</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option></option>
+                <option v-for="product in products">{{ product }}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="exampleFormControlSelect1">Office</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option></option>
+                <option>Only pull from seeded offices</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="exampleFormControlSelect1">State</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option></option>
+                <option>Only pull from seeded states</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="exampleFormControlSelect1">AHJ</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option></option>
+                <option>Only pull from seeded AHJs</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="exampleFormControlSelect1">Level Reviewed</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option></option>
+                <option v-for="level in levelsReviewed"> {{ level }}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="exampleFormControlSelect1">Rejection Source</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option></option>
+                <option v-for="rejectionSource in rejectionSources">{{ rejectionSource}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </ul>
+    </div>
+    <hr>
     <!-- <div v-for="rejection in rejections"> -->
     <div v-for="rejection in filterBy(rejections, searchCategory, 'category')">
       <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
@@ -35,7 +105,37 @@ export default {
     return {
       message: "Welcome to the index page!",
       rejections: [],
-      searchCategory: ""
+      searchCategory: "",
+      showFilter: false,
+      categories: [
+        "Design Electrical",
+        "Design Layout",
+        "Design Planset Edits",
+        "Design Resources",
+        "Design Restrictions", 
+        "Design Structural", 
+        "Generic Design Planset Requirements", 
+        "SolarRoof Requirements"
+      ],
+      products: [
+        "Solar Roof", 
+        "Powerwall", 
+        "Flat Plate"
+      ],
+      levelsReviewed: [
+        "When submitting, AHJ would NOT allow submittal", 
+        "Submitted successfully, received rejection", 
+        "Online submittal method required additional info that was not available",
+      ],
+      rejectionSources: [
+        "New AHJ Requirement",	
+        "Unique Requirement",	
+        "Unknown Source",	
+        "Incorrect AHJ Assigned",	
+        "Conditional AHJ Approval",	
+        "PIDM Review", 
+        "As Built Does Not Match Approved Plans"
+      ]
     };
   },
   created: function() {
@@ -46,6 +146,11 @@ export default {
       console.log(response.data);
       this.rejections = response.data;
     });
+  },
+  methods: {
+    filter: function() {
+      this.showFilter = !this.showFilter;
+    }
   }
 };
 
