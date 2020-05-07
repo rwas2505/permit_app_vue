@@ -1,7 +1,9 @@
 <template>
   <div class="rejections-index">
     <h1>{{ message }}</h1>
-    <div v-for="rejection in rejections">
+    <input v-model="searchCategory">
+    <!-- <div v-for="rejection in rejections"> -->
+    <div v-for="rejection in filterBy(rejections, searchCategory, 'category')">
       <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
       <p>installation: {{ rejection.installation }}</p>
       <p>category: {{ rejection.category }}</p>
@@ -25,12 +27,15 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "Welcome to the index page!",
-      rejections: []
+      rejections: [],
+      searchCategory: ""
     };
   },
   created: function() {
@@ -41,7 +46,7 @@ export default {
       console.log(response.data);
       this.rejections = response.data;
     });
-  },
-  methods: {}
+  }
 };
+
 </script>
