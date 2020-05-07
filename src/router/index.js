@@ -5,6 +5,7 @@ import RejectionsIndex from '../views/RejectionsIndex.vue';
 import RejectionsNew from '../views/RejectionsNew.vue';
 import RejectionsShow from '../views/RejectionsShow.vue';
 import RejectionsEdit from '../views/RejectionsEdit.vue';
+import DataDisplay from '../views/DataDisplay.vue';
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/rejections/:id/edit',
     name: 'rejections-edit',
     component: RejectionsEdit
+  },
+  {
+    path: '/data',
+    name: 'data-display',
+    component: DataDisplay
   }
 ];
 

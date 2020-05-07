@@ -50,7 +50,8 @@
         <div>
           <input type="submit" class="btn btn-success" value="Submit"> |
           <a class="btn btn-warning" v-bind:href="`/rejections/${rejection.id}`" role="button">Cancel </a> |
-          <button class="btn btn-danger" v-on:click="deleteRejection()">Delete</button>
+          <a v-if="deleteConfirmation" class="btn btn-danger" v-on:click="delConfirmation()">Delete</a>
+          <a v-if="!deleteConfirmation" class="btn btn-outline-danger" v-on:click="deleteRejection()">Click again to delete</a> 
         </div>
         <hr>
         <div>
@@ -68,7 +69,8 @@ export default {
   data: function() {
     return {
       rejection: {},
-      errors: []
+      errors: [],
+      deleteConfirmation: true
     };
   },
   
@@ -106,8 +108,12 @@ export default {
           console.log(this.errors)
         });
     },
+    delConfirmation: function() {
+      console.log("confirming delete...");
+      this.deleteConfirmation = !this.deleteConfirmation;
+    },
     deleteRejection: function() {
-      console.log("deleting the rejection...");
+      console.log("deleting rejection...");
       axios.delete(`/api/rejections/${this.rejection.id}`).then(response => {
         console.log(response.data);
         this.$router.push('/rejections');
