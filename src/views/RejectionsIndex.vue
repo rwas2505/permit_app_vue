@@ -1,12 +1,7 @@
 <template>
   <div class="rejections-index">
-    
     <h1>{{ message }}</h1>
-    
-    <!-- <label>Category</label><input v-model="searchCategory">
-    <br>
-    <label>Product</label><input v-model="searchProduct"> -->
-    <button v-on:click="filterOptions()" type="button" class="btn btn-outline-secondary">Hide/Show Filters</button>
+       <button v-on:click="filterOptions()" type="button" class="btn btn-outline-secondary">Hide/Show Filters</button>
       <div v-if="showFilter">
         <ul class="nav justify-content-center">
           <form>
@@ -22,7 +17,6 @@
                 <label for="exampleFormControlSelect1">Sub Category</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="subCategorySelect">
                   <option>All</option>
-                  <!-- <option>try to only display sub categories that match category?</option> -->
                   <option>Best Practices</option>
                 </select>
               </div>
@@ -53,7 +47,6 @@
                 <label for="exampleFormControlSelect1">AHJ</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="ahjSelect">
                   <option>All</option>
-                  <!-- <option>Only pull from seeded AHJs</option> -->
                   <option>Borough of Middletown (PA)</option>
                 </select>
               </div>
@@ -72,33 +65,12 @@
                 </select>
               </div>
             </div>
-              <br>
-              <button v-on:click="applyFilter()" type="button" class="btn btn-outline-secondary">Apply Filter</button> 
-              <!-- display selected options for testing -->
-              <p>Category: {{ categorySelect }}</p>     
-              <p>Product: {{ productSelect }}</p>     
+            <br>
+            <button v-on:click="applyFilter()" type="button" class="btn btn-outline-secondary">Apply Filter</button> 
           </form>
         </ul>
       </div>
     <hr>
-    <!-- <div v-for="rejection in rejections">
-      <div v-if="rejection.category === categorySelect">
-        <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
-        <p>installation: {{ rejection.installation }}</p>
-        <p>category: {{ rejection.category }}</p>
-        <p>sub_category: {{ rejection.sub_category }}</p>
-        <p>product: {{ rejection.product }}</p>
-        <p>office: {{ rejection.office }}</p>
-        <p>state: {{ rejection.state }}</p>
-        <p>ahj: {{ rejection.ahj }}</p>
-        <p>note: {{ rejection.note }}</p>
-        <p>level_reviewed: {{ rejection.level_reviewed }}</p>
-        <p>rejection_source: {{ rejection.rejection_source }}</p>
-        <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
-        <hr>
-        <hr>
-      </div>
-    </div> -->
     <div v-for="rejection in filteredRejections">
       <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
       <p>installation: {{ rejection.installation }}</p>
@@ -140,8 +112,6 @@ export default {
       rejectionSourceSelect: "All",
       rejections: [],
       filteredRejections: [],
-      searchCategory: "",
-      searchProduct: "",
       showFilter: false,
       categories: [
         "Design Electrical",
@@ -222,18 +192,20 @@ export default {
         // console.log(filtered);
         this.filteredRejections = filtered;
       }
+      if (this.levelReviewedSelect !== 'All') {
+        const filtered = this.filteredRejections.filter(entry => entry.level_reviewed === this.levelReviewedSelect);
+        // console.log(filtered);
+        this.filteredRejections = filtered;
+      }
+      if (this.rejectionSourceSelect !== 'All') {
+        const filtered = this.filteredRejections.filter(entry => entry.rejection_source === this.rejectionSourceSelect);
+        // console.log(filtered);
+        this.filteredRejections = filtered;
+      }
     }
   }
 };
-
-
-// when clicking apply filter:
-
-// v-on:change instead of clicking apply filter for select box
 </script>
 
 
-
-levelReviewedSelect
-rejectionSourceSelect
 
