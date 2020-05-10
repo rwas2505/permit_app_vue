@@ -6,6 +6,7 @@ import RejectionsNew from '../views/RejectionsNew.vue';
 import RejectionsShow from '../views/RejectionsShow.vue';
 import RejectionsEdit from '../views/RejectionsEdit.vue';
 import DataDisplay from '../views/DataDisplay.vue';
+import LocationData from '../views/LocationData.vue';
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,11 @@ const routes = [
     path: '/data',
     name: 'data-display',
     component: DataDisplay
+  },
+  {
+    path: '/data/location',
+    name: 'location-display',
+    component: LocationData
   }
 ];
 
