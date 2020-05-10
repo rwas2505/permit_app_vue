@@ -71,6 +71,9 @@
         </ul>
       </div>
     <hr>
+    <p>Total number of entries: {{rejections.length}}</p>
+    <p>Number of filtered results: {{filteredRejections.length}}</p>
+    <p>Filtered results as a precentage of total: {{((filteredRejections.length/rejections.length)*100).toFixed(2)}}%</p>
     <div v-for="rejection in filteredRejections">
       <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
       <p>installation: {{ rejection.installation }}</p>
