@@ -9,6 +9,7 @@ import DataDisplay from '../views/DataDisplay.vue';
 import LocationData from '../views/LocationData.vue';
 import ProductData from '../views/ProductData.vue';
 import CategoryData from '../views/CategoryData.vue';
+import AhjData from '../views/AhjData.vue';
 
 Vue.use(VueRouter)
 
@@ -65,6 +66,11 @@ const routes = [
     path: '/data/category',
     name: 'category-display',
     component: CategoryData
+  },
+  {
+    path: '/data/ahj',
+    name: 'ahj-display',
+    component: AhjData
   }
 ];
 

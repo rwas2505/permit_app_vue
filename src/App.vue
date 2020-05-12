@@ -31,6 +31,7 @@
               <a class="dropdown-item" href="/data/category">Rejections By Category</a>
               <!-- <div class="dropdown-divider"></div> -->
               <a class="dropdown-item" href="/data/product">Rejections By Product</a>
+              <a class="dropdown-item" href="/data/ahj">Rejections By AHJ</a>
             </div>
           </li>
         </ul>
