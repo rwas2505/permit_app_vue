@@ -14,12 +14,12 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Rejection Count By State",
+      message: "Product Rejections",
       rejections: [],
-      uniqueStates: [],
-      statesCount: {},
-      statesXAxis: [],
-      statesYAxis: []   
+      productsCount: {},
+      uniqueProducts: [],
+      xAxis: [],
+      yAxis: []
     };
   },
   created: function() {
@@ -27,28 +27,29 @@ export default {
     axios.get("/api/rejections").then(response=> {
       console.log("this is inside the created callback");
       this.rejections = response.data;
-      this.makeStatesArray();
+      this.makeProductsArray();
       this.makeChart();
     });
   },
   methods: {
-    makeStatesArray: function() {
-      var states = [];
-      // add an instance of state for each rejection to a new array
+    makeProductsArray: function() {
+
+      var products = [];
+      // add an instance of product for each rejection to a new array
       this.rejections.forEach(function(rejection) {
-        states.push(rejection.state);
+        products.push(rejection.product);
       });
 
-      // create an array with only unique states
+      // create an array with only unique products
       // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
       function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index;
       }
-      this.uniqueStates = states.filter( onlyUnique );
+      this.uniqueProducts = products.filter( onlyUnique );
 
-      //get count of each state in states array
+      //get count of each product in products array
       // https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
-      this.statesCount = states.reduce(function(acc, curr) {
+      this.productsCount = products.reduce(function(acc, curr) {
         if (typeof acc[curr] == 'undefined') {
           acc[curr] = 1;
         } else {
@@ -56,23 +57,20 @@ export default {
         }
         return acc;
       },{});
-      var statesCount = this.statesCount;
-      var chartStates = [];
-      var chartStatesCount = [];
+
+      var productsCount = this.productsCount;
+      var chartProducts = [];
+      var chartProductsCount = [];
     
       //create arrays where the index of each array is a key, value pair
-      this.uniqueStates.forEach(function(state) {
-        // console.log(state);
-        chartStates.push(state);
-        // console.log(statesCount[`${state}`]);
-        chartStatesCount.push(statesCount[`${state}`]);
+      this.uniqueProducts.forEach(function(product) {
+        chartProducts.push(product);
+        chartProductsCount.push(productsCount[`${product}`]);
       });
 
       // make arrays available in other methods
-      this.statesXAxis = chartStates;
-      this.statesYAxis = chartStatesCount;
-
-
+      this.xAxis = chartProducts;
+      this.yAxis = chartProductsCount;
     },
     makeChart: function() {
       console.log("in makeChart())");
@@ -83,10 +81,10 @@ export default {
           type: 'column'
         },
         title: {
-          text: 'Data chart under construction'
+          text: 'Rejection Count By Product'
         },
         xAxis: {
-          categories: this.statesXAxis
+          categories: this.xAxis
         },
         yAxis: {
           title: {
@@ -95,8 +93,8 @@ export default {
         },
         series: [
           {
-            name: 'State',
-            data: this.statesYAxis
+            name: 'Product',
+            data: this.yAxis
           }
         ]
       });
