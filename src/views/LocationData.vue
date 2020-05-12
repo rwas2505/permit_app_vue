@@ -14,30 +14,72 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Welcome to the Location Data Page!",
+      message: "Rejection Count By State",
       rejections: [],
-      // statesTest: ["CA","IL","IA"],
-      // numsTest: [1, 10, 5]      
+      uniqueStates: [],
+      statesCount: {},
+      statesXAxis: [],
+      statesYAxis: []   
     };
   },
   created: function() {
     console.log('in the created');
     axios.get("/api/rejections").then(response=> {
       console.log("this is inside the created callback");
-      console.log(response.data);
       this.rejections = response.data;
+      this.makeStatesArray();
       this.makeChart();
     });
   },
-  mounted: function() {
-    console.log('in mounted hook')
-    // var rejectionArray = that.rejections;
-  },
   methods: {
+    makeStatesArray: function() {
+      var states = [];
+      // add an instance of state for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        states.push(rejection.state);
+      });
+
+      // create an array with only unique states
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueStates = states.filter( onlyUnique );
+
+      //get count of each state in states array
+      // https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
+      this.statesCount = states.reduce(function(acc, curr) {
+        if (typeof acc[curr] == 'undefined') {
+          acc[curr] = 1;
+        } else {
+          acc[curr] += 1;
+        }
+        return acc;
+      },{});
+      var statesCount = this.statesCount;
+      var chartStates = [];
+      var chartStatesCount = [];
+    
+      //create arrays where the index of each array is a key, value pair
+      this.uniqueStates.forEach(function(state) {
+        // console.log(state);
+        chartStates.push(state);
+        // console.log(statesCount[`${state}`]);
+        chartStatesCount.push(statesCount[`${state}`]);
+      });
+
+      // make arrays available in other methods
+      this.statesXAxis = chartStates;
+      this.statesYAxis = chartStatesCount;
+
+
+    },
     makeChart: function() {
+      console.log("in makeChart())");
+
       var statesTest = ["CA","IL","IA"];
       var numsTest = [1, 10, 5];
-      console.log(this.rejections)
+      // comment out  event listener as it is breaking the chart
       // document.addEventListener('DOMContentLoaded', function() {
       var myChart = Highcharts.chart('container', {
         chart: {
@@ -47,7 +89,7 @@ export default {
           text: 'Data chart under construction'
         },
         xAxis: {
-          categories: statesTest
+          categories: this.statesXAxis
         },
         yAxis: {
           title: {
@@ -57,45 +99,13 @@ export default {
         series: [
           {
             name: 'State',
-            data: numsTest
+            data: this.statesYAxis
           }
         ]
       });
-      // });
     }
   },
 };
-
-// // var rejectionArray = that.rejections;
-// var statesTest = ["CA","IL","IA"];
-// var numsTest = [1, 10, 5];
-// console.log("This is outside of vue");
-// console.log("THIS:" + this);
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   var myChart = Highcharts.chart('container', {
-//     chart: {
-//       type: 'column'
-//     },
-//     title: {
-//       text: 'Data chart under construction'
-//     },
-//     xAxis: {
-//       categories: statesTest
-//     },
-//     yAxis: {
-//       title: {
-//         text: 'Total Rejections'
-//       }
-//     },
-//     series: [
-//       {
-//         name: 'State',
-//         data: numsTest
-//       }
-//     ]
-//   });
-// });
 </script>
 
 
