@@ -8,6 +8,7 @@ import RejectionsEdit from '../views/RejectionsEdit.vue';
 import DataDisplay from '../views/DataDisplay.vue';
 import LocationData from '../views/LocationData.vue';
 import ProductData from '../views/ProductData.vue';
+import CategoryData from '../views/CategoryData.vue';
 
 Vue.use(VueRouter)
 
@@ -59,6 +60,11 @@ const routes = [
     path: '/data/product',
     name: 'product-display',
     component: ProductData
+  },
+  {
+    path: '/data/category',
+    name: 'category-display',
+    component: CategoryData
   }
 ];
 
