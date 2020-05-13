@@ -3,50 +3,76 @@
     <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>New Permit Rejection Entry</h1>
-        <div class="form-group">
-          category: <input type="text" class="form-control" v-model="category">
-          <hr>
-        </div>
-        <div class="form-group">
-          sub_category: <input type="text" class="form-control" v-model="sub_category">
-          <hr>
-        </div>
-        <div class="form-group">
-          product: <input type="text" class="form-control" v-model="product">
-          <hr>
-        </div>
-        <div class="form-group">
-          office: <input type="text" class="form-control" v-model="office">
-          <hr>
-        </div>
-        <div class="form-group">
-          state: <input type="text" class="form-control" v-model="state">
-          <hr>
-        </div>
-        <div class="form-group">
-          ahj: <input type="text" class="form-control" v-model="ahj">
-          <hr>
-        </div>
-        <div class="form-group">
-          note: <input type="text" class="form-control" v-model="note">
-          <hr>
-        </div>
-        <div class="form-group">
-          installation: <input type="text" class="form-control" v-model="installation">
-          <hr>
-        </div>
-        <div class="form-group">
-          level_reviewed: <input type="text" class="form-control" v-model="level_reviewed">
-          <hr>
-        </div>
-        <div class="form-group">
-          rejection_source: <input type="text" class="form-control" v-model="rejection_source">
-          <hr>
-        </div>
-        <div class="form-group">
-          corrections_uploaded: <input type="text" class="form-control" v-model="corrections_uploaded">
-          <hr>
-        </div>
+          <form>
+            <!-- <div class="form-row"> -->
+              <div class="col">
+                <label for="exampleFormControlSelect1">Category</label>
+                <select class="form-control" id="categorySelect" v-model="categorySelect">
+                  <option v-for="category in categories">{{ category }}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Sub Category</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="subCategorySelect">
+                  <option v-for="subCategory in uniqueSubCategories">{{ subCategory }}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Product</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="productSelect">
+                  <option v-for="product in products">{{ product }}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Office</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="officeSelect">
+                  <option v-for="office in uniqueOffices">{{ office }}</option>
+                </select>
+              </div>
+            <!-- </div> -->
+            <!-- <div class="form-row"> -->
+              <div class="col">
+                <label for="exampleFormControlSelect1">State</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="stateSelect">
+                  <option v-for="state in uniqueStates">{{ state }}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">AHJ</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="ahjSelect">
+                  <option v-for="ahj in uniqueAhjs">{{ ahj }}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Level Reviewed</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="levelReviewedSelect">
+                  <option v-for="level in levelsReviewed"> {{ level }}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Rejection Source</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="rejectionSourceSelect">
+                  <option v-for="rejectionSource in rejectionSources">{{ rejectionSource}}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Corrections Uploaded</label>
+                <select class="form-control" id="exampleFormControlSelect1" v-model="correctionsUploadedSelect">
+                  <option>True</option>
+                  <option>False</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Installation ID</label>
+                <input class="form-control" id="exampleFormControlSelect1" v-model="installationIdSelect">                  
+              </div>
+              <div class="col">
+                <label for="exampleFormControlSelect1">Note</label>
+                <input class="form-control" id="exampleFormControlSelect1" v-model="noteSelect">                  
+              </div>
+            <!-- </div> -->
+            <br>
+          </form>
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
     </div>
@@ -58,33 +84,68 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      category: "default category",
-      sub_category: "default sub_category",
-      product: "default product",
-      office: "default office",
-      state: "default state",
-      ahj: "default ahj",
-      note: "default note",
-      installation: 123456,
-      level_reviewed: "default level_reviewed",
-      rejection_source: "default rejection_source",
-      corrections_uploaded: "default corrections_uploaded"
+      categorySelect: "",
+      subCategorySelect: "",
+      productSelect: "",
+      officeSelect: "",
+      ahjSelect: "",
+      stateSelect: "",
+      levelReviewedSelect: "",
+      rejectionSourceSelect: "",
+      rejections: [],
+      filteredRejections: [],
+      correctionsUploadedSelect: "",
+      installationIdSelect: "",
+      noteSelect: "",
+      categories: [
+        "Design Electrical",
+        "Design Layout",
+        "Design Planset Edits",
+        "Design Resources",
+        "Design Restrictions", 
+        "Design Structural", 
+        "Generic Design Planset Requirements", 
+        "SolarRoof Requirements"
+      ],
+      products: [
+        "Flat Plate",
+        "Powerwall", 
+        "Solar Roof" 
+      ],
+      levelsReviewed: [
+        "Online submittal method required additional info that was not available",
+        "Submitted successfully, received rejection", 
+        "When submitting, AHJ would NOT allow submittal", 
+      ],
+      rejectionSources: [
+        "As Built Does Not Match Approved Plans",
+        "Conditional AHJ Approval",	
+        "Incorrect AHJ Assigned",	
+        "New AHJ Requirement",	
+        "PIDM Review", 
+        "Unique Requirement",	
+        "Unknown Source",	
+      ],
+      uniqueStates: [],
+      uniqueAhjs: [],
+      uniqueOffices: [],
+      uniqueSubCategories: []
     };
   },
   methods: {
     submit: function() {
       var params = {
-        category: this.category,
-        sub_category: this.sub_category,
-        product: this.product,
-        office: this.office,
-        state: this.state,
-        ahj: this.ahj,
-        note: this.note,
-        installation: this.installation,
-        level_reviewed: this.level_reviewed,
-        rejection_source: this.rejection_source,
-        corrections_uploaded: this.corrections_uploaded
+        category: this.categorySelect,
+        sub_category: this.subCategorySelect,
+        product: this.productSelect,
+        office: this.officeSelect,
+        state: this.stateSelect,
+        ahj: this.ahjSelect,
+        note: this.noteSelect,
+        installation: this.installationIdSelect,
+        level_reviewed: this.levelReviewedSelect,
+        rejection_source: this.rejectionSourceSelect,
+        corrections_uploaded: this.correctionsUploadedSelect
       };
       console.log(params)
       axios
@@ -97,7 +158,82 @@ export default {
           console.log(error.response.status);
           this.status = error.response.status;
         });
-    }
-  }
+    },
+    makeOfficesArray: function() {
+      var offices = [];
+      // add an instance of office for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        offices.push(rejection.office);
+      });
+
+      // create an array with only unique offices sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueOffices = offices.filter( onlyUnique ).sort();
+      // console.log(this.uniqueOffices);
+    },
+    makeSubCategoriesArray: function() {
+      var subCategories = [];
+      // add an instance of sub_category for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        subCategories.push(rejection.sub_category);
+      });
+
+      // create an array with only unique sub_categories sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueSubCategories = subCategories.filter( onlyUnique ).sort();
+      // console.log(this.uniqueSubCategories);
+    },
+
+    makeStatesArray: function() {
+      var states = [];
+      // add an instance of state for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        states.push(rejection.state);
+      });
+
+      // create an array with only unique states sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueStates = states.filter( onlyUnique ).sort();
+    },
+    makeAhjsArray: function() {
+
+      var ahjs = [];
+      // add an instance of an ahj for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        ahjs.push(rejection.ahj);
+      });
+
+      // create an array with only unique ahjs sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueAhjs = ahjs.filter( onlyUnique ).sort();
+    },
+
+  },
+  created: function() {
+    console.log('in the created');
+    // console.log("this is outside the callback");
+    axios.get("/api/rejections").then(response=> {
+      // console.log("this is inside the callback");
+      console.log(response.data);
+      this.rejections = response.data;
+      this.makeStatesArray();
+      this.makeAhjsArray();
+      this.makeOfficesArray();
+      this.makeSubCategoriesArray();
+    });
+  },
+
 };
 </script>
