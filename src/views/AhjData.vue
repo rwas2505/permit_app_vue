@@ -41,12 +41,12 @@ export default {
       });
       console.log(ahjs);
 
-      // create an array with only unique ahjs
+      // create an array with only unique ahjs sorted
       // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
       function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index;
       }
-      this.uniqueAhjs = ahjs.filter( onlyUnique );
+      this.uniqueAhjs = ahjs.filter( onlyUnique ).sort();
 
       //get count of each ahj in ahjs array
       // https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements

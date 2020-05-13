@@ -41,12 +41,12 @@ export default {
       });
       // console.log(categories);
 
-      // create an array with only unique categories
+      // create an array with only unique categories sorted
       // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
       function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index;
       }
-      this.uniqueCategories = categories.filter( onlyUnique );
+      this.uniqueCategories = categories.filter( onlyUnique ).sort();
 
       //get count of each category in categories array
       // https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements

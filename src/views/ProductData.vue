@@ -45,7 +45,7 @@ export default {
       function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index;
       }
-      this.uniqueProducts = products.filter( onlyUnique );
+      this.uniqueProducts = products.filter( onlyUnique ).sort();
 
       //get count of each product in products array
       // https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements

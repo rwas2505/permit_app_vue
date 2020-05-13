@@ -39,12 +39,12 @@ export default {
         states.push(rejection.state);
       });
 
-      // create an array with only unique states
+      // create an array with only unique states sorted
       // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
       function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index;
       }
-      this.uniqueStates = states.filter( onlyUnique );
+      this.uniqueStates = states.filter( onlyUnique ).sort();
 
       //get count of each state in states array
       // https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements

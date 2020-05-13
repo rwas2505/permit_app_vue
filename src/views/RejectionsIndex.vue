@@ -17,7 +17,7 @@
                 <label for="exampleFormControlSelect1">Sub Category</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="subCategorySelect">
                   <option>All</option>
-                  <option>Best Practices</option>
+                  <option v-for="subCategory in uniqueSubCategories">{{ subCategory }}</option>
                 </select>
               </div>
               <div class="col">
@@ -31,6 +31,7 @@
                 <label for="exampleFormControlSelect1">Office</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="officeSelect">
                   <option>All</option>
+                  <option v-for="office in uniqueOffices">{{ office }}</option>
                 </select>
               </div>
             </div>
@@ -126,26 +127,28 @@ export default {
         "SolarRoof Requirements"
       ],
       products: [
-        "Solar Roof", 
+        "Flat Plate",
         "Powerwall", 
-        "Flat Plate"
+        "Solar Roof" 
       ],
       levelsReviewed: [
-        "When submitting, AHJ would NOT allow submittal", 
-        "Submitted successfully, received rejection", 
         "Online submittal method required additional info that was not available",
+        "Submitted successfully, received rejection", 
+        "When submitting, AHJ would NOT allow submittal", 
       ],
       rejectionSources: [
+        "As Built Does Not Match Approved Plans",
+        "Conditional AHJ Approval",	
+        "Incorrect AHJ Assigned",	
         "New AHJ Requirement",	
+        "PIDM Review", 
         "Unique Requirement",	
         "Unknown Source",	
-        "Incorrect AHJ Assigned",	
-        "Conditional AHJ Approval",	
-        "PIDM Review", 
-        "As Built Does Not Match Approved Plans"
       ],
       uniqueStates: [],
-      uniqueAhjs: []
+      uniqueAhjs: [],
+      uniqueOffices: [],
+      uniqueSubCategories: []
     };
   },
   created: function() {
@@ -157,9 +160,42 @@ export default {
       this.rejections = response.data;
       this.makeStatesArray();
       this.makeAhjsArray();
+      this.makeOfficesArray();
+      this.makeSubCategoriesArray();
     });
   },
   methods: {
+    makeOfficesArray: function() {
+      var offices = [];
+      // add an instance of office for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        offices.push(rejection.office);
+      });
+
+      // create an array with only unique offices sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueOffices = offices.filter( onlyUnique ).sort();
+      // console.log(this.uniqueOffices);
+    },
+    makeSubCategoriesArray: function() {
+      var subCategories = [];
+      // add an instance of sub_category for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        subCategories.push(rejection.sub_category);
+      });
+
+      // create an array with only unique sub_categories sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueSubCategories = subCategories.filter( onlyUnique ).sort();
+      // console.log(this.uniqueSubCategories);
+    },
+
     makeStatesArray: function() {
       var states = [];
       // add an instance of state for each rejection to a new array
@@ -167,13 +203,12 @@ export default {
         states.push(rejection.state);
       });
 
-      // create an array with only unique states
+      // create an array with only unique states sorted
       // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
       function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index;
       }
       this.uniqueStates = states.filter( onlyUnique ).sort();
-      console.log(this.uniqueStates);
     },
     makeAhjsArray: function() {
 
@@ -182,9 +217,8 @@ export default {
       this.rejections.forEach(function(rejection) {
         ahjs.push(rejection.ahj);
       });
-      console.log(ahjs);
 
-      // create an array with only unique ahjs
+      // create an array with only unique ahjs sorted
       // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
       function onlyUnique(value, index, self) { 
         return self.indexOf(value) === index;
