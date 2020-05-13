@@ -1,8 +1,37 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <a class="nav-link" href="/rejections/new">Enter a New Rejection</a>
-    <a class="nav-link" href="/rejections">View All Rejections</a>
+    <section class="wrapper style1">
+      <div class="container">
+        <div class="row gtr-200">
+          <section class="col-4 col-12-narrower">
+            <div class="box highlight">
+              <span style="font-size: 96px; color: Dodgerblue;">
+                <a id="sun" class="fas fa-atom" href="/rejections/new"></a>
+              </span>
+              <h3>Enter a New Rejection</h3>
+            </div>
+          </section>
+          <section class="col-4 col-12-narrower">
+            <div class="box highlight">
+              <span style="font-size: 96px; color: Dodgerblue;">
+                <a id="sun" class="fas fa-sun" href="/rejections"></a>
+              </span>
+              <h3>View All Rejections</h3>
+            </div>
+          </section>
+          <section class="col-4 col-12-narrower">
+            <div class="box highlight">
+              <span style="font-size: 96px; color: Dodgerblue;">
+                <a id="sun" class="fas fa-solar-panel" href="/rejections/new"></a>
+              </span>
+              <h3>View Charts</h3>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
   </div>
 </template>
 
