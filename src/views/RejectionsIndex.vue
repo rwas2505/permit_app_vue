@@ -31,7 +31,6 @@
                 <label for="exampleFormControlSelect1">Office</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="officeSelect">
                   <option>All</option>
-                  <option>Norristown</option>
                 </select>
               </div>
             </div>
@@ -40,14 +39,14 @@
                 <label for="exampleFormControlSelect1">State</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="stateSelect">
                   <option>All</option>
-                  <option>PA</option>
+                  <option v-for="state in uniqueStates">{{ state }}</option>
                 </select>
               </div>
               <div class="col">
                 <label for="exampleFormControlSelect1">AHJ</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="ahjSelect">
                   <option>All</option>
-                  <option>Borough of Middletown (PA)</option>
+                  <option v-for="ahj in uniqueAhjs">{{ ahj }}</option>
                 </select>
               </div>
               <div class="col">
@@ -144,19 +143,54 @@ export default {
         "Conditional AHJ Approval",	
         "PIDM Review", 
         "As Built Does Not Match Approved Plans"
-      ]
+      ],
+      uniqueStates: [],
+      uniqueAhjs: []
     };
   },
   created: function() {
     console.log('in the created');
-    console.log("this is outside the callback");
+    // console.log("this is outside the callback");
     axios.get("/api/rejections").then(response=> {
-      console.log("this is inside the callback");
+      // console.log("this is inside the callback");
       console.log(response.data);
       this.rejections = response.data;
+      this.makeStatesArray();
+      this.makeAhjsArray();
     });
   },
   methods: {
+    makeStatesArray: function() {
+      var states = [];
+      // add an instance of state for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        states.push(rejection.state);
+      });
+
+      // create an array with only unique states
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueStates = states.filter( onlyUnique ).sort();
+      console.log(this.uniqueStates);
+    },
+    makeAhjsArray: function() {
+
+      var ahjs = [];
+      // add an instance of an ahj for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        ahjs.push(rejection.ahj);
+      });
+      console.log(ahjs);
+
+      // create an array with only unique ahjs
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueAhjs = ahjs.filter( onlyUnique ).sort();
+    },
     filterOptions: function() {
       this.showFilter = !this.showFilter;
     },
