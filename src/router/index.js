@@ -65,7 +65,7 @@ const routes = [
     path: '/data/ahj',
     name: 'ahj-display',
     component: AhjData
-  }
+  } 
 ];
 
 const router = new VueRouter({

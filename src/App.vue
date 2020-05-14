@@ -14,13 +14,13 @@
             <li>
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Charts</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="color:#37c0fb; background-color:#333">
-                <a class="dropdown-item" href="/data/location" style="color:#37c0fb;">State</a>
+                <a class="dropdown-item" href="/data/location" style="color:#C0C0C0;">State</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/data/ahj" style="color:#37c0fb;">AHJ</a>
+                <a class="dropdown-item" href="/data/ahj" style="color:#C0C0C0;">AHJ</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/data/category" style="color:#37c0fb;">Category</a>
+                <a class="dropdown-item" href="/data/category" style="color:#C0C0C0;">Category</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/data/product" style="color:#37c0fb;">Product</a>
+                <a class="dropdown-item" href="/data/product" style="color:#C0C0C0;">Product</a>
               </div>
             </li>
           </ul>

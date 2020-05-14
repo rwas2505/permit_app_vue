@@ -1,6 +1,5 @@
 <template>
-  <div class="rejections-show">
-    <h1>{{ message }}</h1>
+  <div class="rejections-show" style="text-align: center; margin-top: 25px;">
     <!-- <h1>{{ rejection }}</h1> -->
       <p>installation: {{ rejection.installation }}</p>
       <p>category: {{ rejection.category }}</p>
@@ -13,6 +12,7 @@
       <p>level_reviewed: {{ rejection.level_reviewed }}</p>
       <p>rejection_source: {{ rejection.rejection_source }}</p>
       <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
+      <p><a style="color:Dodgerblue;">Job Link</a></p>
     <a class="btn btn-primary" v-bind:href="`/rejections/${rejection.id}/edit`" role="button">Edit </a>
   </div>
 </template>
@@ -26,7 +26,6 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Welcome to the Show Page",
       rejection: {}
     };
   },

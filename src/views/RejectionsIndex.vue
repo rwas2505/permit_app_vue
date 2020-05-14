@@ -1,8 +1,16 @@
 <template>
   <div class="rejections-index">
-    <h1>{{ message }}</h1>
-       <button v-on:click="filterOptions()" type="button" class="btn btn-outline-secondary">Hide/Show Filters</button>
-      <div v-if="showFilter">
+    <section class="wrapper style1" style="text-align: center;">
+      <h1>{{ message }}</h1>
+      <div id="container" class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <input style="width:350px;" class="justify-content-center" type="search" placeholder="Search Filtered Results" aria-label="Search" v-model="pageSearch">
+          </div>  
+        </div>
+      </div>
+      <button v-on:click="filterOptions()" type="button" class="btn btn-outline-secondary" style="text-align: center;">Show/Hide Filters</button>
+      <div v-if="showFilter" style=" margin-left: 50px; margin-right: 50px;">
         <ul class="nav justify-content-center">
           <form>
             <div class="form-row">
@@ -70,26 +78,39 @@
           </form>
         </ul>
       </div>
-    <hr>
-    <p>Total number of entries: {{rejections.length}}</p>
-    <p>Number of filtered results: {{filteredRejections.length}}</p>
-    <p>Filtered results as a precentage of total: {{((filteredRejections.length/rejections.length)*100).toFixed(2)}}%</p>
-    <div v-for="rejection in filteredRejections">
-      <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
-      <p>installation: {{ rejection.installation }}</p>
-      <p>category: {{ rejection.category }}</p>
-      <p>sub_category: {{ rejection.sub_category }}</p>
-      <p>product: {{ rejection.product }}</p>
-      <p>office: {{ rejection.office }}</p>
-      <p>state: {{ rejection.state }}</p>
-      <p>ahj: {{ rejection.ahj }}</p>
-      <p>note: {{ rejection.note }}</p>
-      <p>level_reviewed: {{ rejection.level_reviewed }}</p>
-      <p>rejection_source: {{ rejection.rejection_source }}</p>
-      <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
       <hr>
-      <hr>
-    </div>
+      <div id="calculations">
+        <p>Total number of entries: {{rejections.length}}</p>
+        <p>Number of filtered results: {{filteredRejections.length}}</p>
+        <p>Filtered results as a percentage of total: {{((filteredRejections.length/rejections.length)*100).toFixed(2)}}%</p>
+      </div>
+      <div class="container" v-for="rejection in filterBy(filteredRejections, pageSearch)">
+        <div class="row">
+          <section class="col-12 col-12-narrower" style="text-align: center;">
+            <div class="box post">
+              <!-- <a href="#" class="image left"><img src="images/pic01.jpg" alt="" /></a> -->
+              <div>
+                <a v-bind:href="`/rejections/${rejection.id}`" class="fas fa-clipboard-check" style="font-size: 48px; color: Dodgerblue;"></a>
+                <p>id: {{ rejection.id }}</p>
+                <p>installation: {{ rejection.installation }}</p>
+                <p>category: {{ rejection.category }}</p>
+                <p>sub_category: {{ rejection.sub_category }}</p>
+                <p>product: {{ rejection.product }}</p>
+                <p>office: {{ rejection.office }}</p>
+                <p>state: {{ rejection.state }}</p>
+                <p>ahj: {{ rejection.ahj }}</p>
+                <p>note: {{ rejection.note }}</p>
+                <p>level_reviewed: {{ rejection.level_reviewed }}</p>
+                <p>rejection_source: {{ rejection.rejection_source }}</p>
+                <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
+                <hr>
+                <hr>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -104,7 +125,8 @@ export default {
   mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      message: "All Entries Live Here",
+      message: "All Entries",
+      pageSearch: "",
       categorySelect: "All",
       subCategorySelect: "All",
       productSelect: "All",
@@ -158,6 +180,7 @@ export default {
       // console.log("this is inside the callback");
       console.log(response.data);
       this.rejections = response.data;
+      this.filteredRejections = this.rejections;
       this.makeStatesArray();
       this.makeAhjsArray();
       this.makeOfficesArray();

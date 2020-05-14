@@ -2515,7 +2515,7 @@ input, select, textarea {
 		}
 
 		.box.post .inner {
-			margin-left: calc(30% + 2em);
+			margin-left: calc(10% + 2em);
 		}
 
 			.box.post .inner > :last-child {
@@ -3362,4 +3362,22 @@ input, select, textarea {
 				text-align: left;
 			}
 
+		/* Ryan's Inputs */
+
+		
+	}
+
+	#calculations {
+		/* background-color: Dodgerblue; */
+		margin-left: 500px;
+		margin-right: 500px;
+		/* color: #C0C0C0; */
+		color: #333;
+		background-color:#C0C0C0;
+		/* background-color:#333; */
+		border-radius: 25px;
+	}
+
+	#container {
+		padding-bottom: 25px;
 	}
