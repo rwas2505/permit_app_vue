@@ -2528,10 +2528,15 @@ input, select, textarea {
 		}
 
 /* Header */
+	#logo {
+		background-color: rgb(152, 161, 172);
+		padding: 0;
+		margin: 0;
+	}
 
 	#header {
 		text-align: center;
-		padding: 3em 0 0 0;
+		padding: 0em 0 0 0;
 		background-color: #fff;
 		background-image: url("images/bg02.png"), url("images/bg02.png"), url("images/bg01.png");
 		background-position: top left,					top left,					top left;
@@ -2540,7 +2545,7 @@ input, select, textarea {
 	}
 
 		#header h1 {
-			padding: 0 0 2.75em 0;
+			padding: 0 0 0 0;
 			margin: 0;
 		}
 

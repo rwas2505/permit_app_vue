@@ -1,6 +1,5 @@
 <template>
   <div class="data">
-    <h1>{{ message }}</h1>
     <div id="container" style="width:100%; height:400px;"></div>
   </div>
 </template>
@@ -14,7 +13,6 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Product Rejections",
       rejections: [],
       productsCount: {},
       uniqueProducts: [],

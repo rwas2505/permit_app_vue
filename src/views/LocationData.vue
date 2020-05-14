@@ -1,7 +1,6 @@
 <template>
   <div class="data">
-    <h1>{{ message }}</h1>
-    <div id="container" style="width:100%; height:400px;"></div>
+    <div id="placeChart" style="width:100%; height:400px;"></div>
   </div>
 </template>
 
@@ -14,7 +13,6 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Rejection Count By State",
       rejections: [],
       uniqueStates: [],
       statesCount: {},
@@ -78,12 +76,12 @@ export default {
       console.log("in makeChart())");
       // comment out  event listener as it is breaking the chart
       // document.addEventListener('DOMContentLoaded', function() {
-      var myChart = Highcharts.chart('container', {
+      var myChart = Highcharts.chart('placeChart', {
         chart: {
           type: 'column'
         },
         title: {
-          text: 'Data chart under construction'
+          text: 'Rejection Count By State'
         },
         xAxis: {
           categories: this.statesXAxis
@@ -100,6 +98,7 @@ export default {
           }
         ]
       });
+      // });
     }
   },
 };
