@@ -12,8 +12,10 @@
             <li><a href="/rejections">All</a></li>
             <li><a href="/rejections/new">New</a></li>
             <li>
-              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Charts</a>
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/charts"> Charts</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="color:#37c0fb; background-color:#333">
+                <a class="dropdown-item" href="/charts" style="color:#C0C0C0;">Home</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/data/location" style="color:#C0C0C0;">State</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/data/ahj" style="color:#C0C0C0;">AHJ</a>

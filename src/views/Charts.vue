@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
+  <div class="charts">
     <section id="chartHead" style="text-align:center;" class="wrapper style1">
       <div class="container">
         <div id="content">
           <article>
             <header>
-              <h1>Interactive Permit Databse</h1>
+              <h1>Choose a chart below</h1>
             </header>
           </article>
         </div>
@@ -14,49 +14,40 @@
     <section class="wrapper style1">
       <div class="container">
         <div class="row gtr-200">
-          <section class="col-4 col-12-narrower">
+          <section class="col-3 col-12-narrower">
             <div class="box highlight">
               <span style="font-size: 96px; color: Dodgerblue;">
-                <a id="sun" class="fas fa-atom" href="/rejections/new"></a>
+                <a id="sun" class="fas fa-globe-americas" href="/data/location"></a>
               </span>
-              <h3>Enter a New Rejection</h3>
+              <h3>Rejections by State</h3>
             </div>
           </section>
-          <section class="col-4 col-12-narrower">
+          <section class="col-3 col-12-narrower">
             <div class="box highlight">
               <span style="font-size: 96px; color: Dodgerblue;">
-                <a id="sun" class="fas fa-sun" href="/rejections"></a>
+                <a id="sun" class="fas fa-building" href="/data/ahj"></a>
               </span>
-              <h3>View All Rejections</h3>
+              <h3>Rejections by AHJ</h3>
             </div>
           </section>
-          <section class="col-4 col-12-narrower">
+          <section class="col-3 col-12-narrower">
             <div class="box highlight">
               <span style="font-size: 96px; color: Dodgerblue;">
-                <a id="sun" class="fas fa-solar-panel" href="/charts"></a>
+                <a id="sun" class="fas fa-list" href="/data/category"></a>
               </span>
-              <h3>View Charts</h3>
+              <h3>Rejections by Category</h3>
+            </div>
+          </section>
+          <section class="col-3 col-12-narrower">
+            <div class="box highlight">
+              <span style="font-size: 96px; color: Dodgerblue;">
+                <a id="sun" class="fas fa-charging-station" href="/data/product"></a>
+              </span>
+              <h3>Rejections by Product</h3>
             </div>
           </section>
         </div>
       </div>
     </section>
-
   </div>
 </template>
-
-<style>
-</style>
-
-<script>
-import axios from "axios";
-
-export default {
-  data: function() {
-    return {
-      rejections: []
-    };
-  },
-  methods: {}
-};
-</script>
