@@ -8,7 +8,6 @@
       <!-- Nav -->
         <nav id="nav">
           <ul>
-            <li><a href="/upload">Upload</a></li>
             <li><a href="/">Home</a></li>
             <li><a href="/rejections">All</a></li>
             <li><a href="/rejections/new">New</a></li>
@@ -19,7 +18,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/data/location" style="color:#C0C0C0;">State</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/data/ahj" style="color:#C0C0C0;">AHJ</a>
+                <a class="dropdown-item" href="/data/ahj"   >AHJ</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/data/category" style="color:#C0C0C0;">Category</a>
                 <div class="dropdown-divider"></div>

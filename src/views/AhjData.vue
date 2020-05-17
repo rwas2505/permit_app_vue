@@ -1,6 +1,24 @@
 <template>
   <div class="data">
     <div id="container" style="width:100%; height:400px;"></div>
+      <div class="row ">
+        <div class="col-md-12 text-center">
+          <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Charts
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/data/location" style="color:#C0C0C0;">State</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/data/ahj"   >AHJ</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/data/category" style="color:#C0C0C0;">Category</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/data/product" style="color:#C0C0C0;">Product</a>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
