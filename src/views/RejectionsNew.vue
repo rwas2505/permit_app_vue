@@ -147,7 +147,7 @@ export default {
         rejection_source: this.rejectionSourceSelect,
         corrections_uploaded: this.correctionsUploadedSelect
       };
-      console.log(params)
+      console.log(params);
       axios
         .post("/api/rejections", params)
         .then(response => {

@@ -10,6 +10,7 @@ import ProductData from '../views/ProductData.vue';
 import CategoryData from '../views/CategoryData.vue';
 import AhjData from '../views/AhjData.vue';
 import Charts from '../views/Charts.vue';
+import Upload from '../views/Upload.vue';
 
 Vue.use(VueRouter)
 
@@ -71,7 +72,13 @@ const routes = [
     path: '/charts',
     name: 'chart-display',
     component: Charts
+  },
+  {
+    path: '/upload',
+    name: 'upload-display',
+    component: Upload
   } 
+
 ];
 
 const router = new VueRouter({
