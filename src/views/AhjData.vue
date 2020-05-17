@@ -4,17 +4,17 @@
       <div class="row ">
         <div class="col-md-12 text-center">
           <div class="btn-group">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Charts
+            <button type="button" class="btn btn-light dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              AHJ
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/data/location" style="color:#C0C0C0;">State</a>
+              <a class="dropdown-item" href="/data/location">State</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/data/ahj"   >AHJ</a>
+              <!-- <a class="dropdown-item" href="/data/ahj">AHJ</a>
+              <div class="dropdown-divider"></div> -->
+              <a class="dropdown-item" href="/data/category">Category</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/data/category" style="color:#C0C0C0;">Category</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/data/product" style="color:#C0C0C0;">Product</a>
+              <a class="dropdown-item" href="/data/product">Product</a>
             </div>
         </div>
       </div>

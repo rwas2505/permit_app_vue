@@ -5,7 +5,7 @@
         <div class="col-md-12 text-center">
           <div class="btn-group">
             <button type="button" class="btn btn-light dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-              Charts
+              Product
             </button>
             <div class="dropdown-menu" >
               <a class="dropdown-item" href="/data/location">State</a>
@@ -13,8 +13,8 @@
               <a class="dropdown-item" href="/data/ahj">AHJ</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/data/category">Category</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/data/product">Product</a>
+              <!-- <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/data/product">Product</a> -->
             </div>
         </div>
       </div>

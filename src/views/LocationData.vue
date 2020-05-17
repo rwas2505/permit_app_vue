@@ -5,11 +5,11 @@
         <div class="col-md-12 text-center">
           <div class="btn-group">
             <button type="button" class="btn btn-light dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-              Charts
+              State
             </button>
             <div class="dropdown-menu" >
-              <a class="dropdown-item" href="/data/location">State</a>
-              <div class="dropdown-divider"></div>
+              <!-- <a class="dropdown-item" href="/data/location">State</a>
+              <div class="dropdown-divider"></div> -->
               <a class="dropdown-item" href="/data/ahj">AHJ</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/data/category">Category</a>

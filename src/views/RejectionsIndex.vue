@@ -89,13 +89,13 @@
           </form>
         </ul>
       </div>
-      <hr>
+      <br></br>
       <div id="calculations">
         <p>Total number of entries: {{rejections.length}}</p>
         <p>Number of filtered results: {{filteredRejections.length}}</p>
         <p>Filtered results as a percentage of total: {{((filteredRejections.length/rejections.length)*100).toFixed(2)}}%</p>
       </div>
-      <hr>
+      <br>
       <div id="container" class="container">
         <div class="row">
           <div class="col-md-12 text-center">
