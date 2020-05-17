@@ -5,21 +5,21 @@
             class   = "btn btn-default"
             :data   = "json_data"
             name    = "permit_app_report.csv">
-        
-            Download CSV (This is a slot)
-        
+            <button type="button" class="btn btn-link">Download CSV</button>
+            <!-- Download CSV (This is a slot) -->
+  
         </download-csv>  
       </div>
 
     <section class="wrapper style1" style="text-align: center;">
       <h1>{{ message }}</h1>
-      <div id="container" class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
+      <!-- <div id="container" class="container"> -->
+        <!-- <div class="row"> -->
+          <!-- <div class="col-md-12 text-center">
             <input style="width:350px;" class="justify-content-center" type="search" placeholder="Search Filtered Results" aria-label="Search" v-model="pageSearch">
-          </div>  
-        </div>
-      </div>
+          </div>   -->
+        <!-- </div> -->
+      <!-- </div> -->
       <button v-on:click="filterOptions()" type="button" class="btn btn-outline-secondary" style="text-align: center;">Show/Hide Filters</button>
       <div v-if="showFilter" style=" margin-left: 50px; margin-right: 50px;">
         <ul class="nav justify-content-center">
@@ -95,6 +95,15 @@
         <p>Number of filtered results: {{filteredRejections.length}}</p>
         <p>Filtered results as a percentage of total: {{((filteredRejections.length/rejections.length)*100).toFixed(2)}}%</p>
       </div>
+      <hr>
+      <div id="container" class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <input style="width:350px;" class="justify-content-center" type="search" placeholder="Search Filtered Results" aria-label="Search" v-model="pageSearch">
+          </div>  
+        </div>
+      </div>
+
       <div class="container" v-for="rejection in filterBy(filteredRejections, pageSearch)">
         <div class="row">
           <section class="col-12 col-12-narrower" style="text-align: center;">
