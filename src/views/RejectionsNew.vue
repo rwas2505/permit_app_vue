@@ -84,6 +84,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
+      updatedResponse: {},
       categorySelect: "",
       subCategorySelect: "",
       productSelect: "",
@@ -145,13 +146,13 @@ export default {
         installation: this.installationIdSelect,
         level_reviewed: this.levelReviewedSelect,
         rejection_source: this.rejectionSourceSelect,
-        corrections_uploaded: this.correctionsUploadedSelect
+        corrections_uploaded: this.correctionsUploadedSelect,
       };
       console.log(params);
       axios
         .post("/api/rejections", params)
         .then(response => {
-          this.$router.push("/rejections");
+          this.$router.push("/rejections/" + response.data.id);
         })
         .catch(error => {
           this.errors = error.response.data.errors;

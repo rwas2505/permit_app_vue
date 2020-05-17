@@ -11,8 +11,9 @@ import CategoryData from '../views/CategoryData.vue';
 import AhjData from '../views/AhjData.vue';
 import Charts from '../views/Charts.vue';
 import Upload from '../views/Upload.vue';
+// import WebViewer from '../views/WebViewer.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -77,7 +78,12 @@ const routes = [
     path: '/upload',
     name: 'upload-display',
     component: Upload
-  } 
+  },
+  // {
+  //   path: '/webviewer',
+  //   name: 'webviewer-display',
+  //   component: WebViewer
+  // }  
 
 ];
 

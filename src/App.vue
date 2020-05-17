@@ -8,6 +8,7 @@
       <!-- Nav -->
         <nav id="nav">
           <ul>
+            <li><a href="/upload">Upload</a></li>
             <li><a href="/">Home</a></li>
             <li><a href="/rejections">All</a></li>
             <li><a href="/rejections/new">New</a></li>
@@ -27,6 +28,8 @@
             </li>
           </ul>
         </nav>
+   
+   
     </div>
     <router-view/>
   </div>
@@ -39,9 +42,10 @@
 import axios from "axios";
 
 export default {
+  name: 'app',
   data: function() {
     return {
-      categoryFilter: ""
+      categoryFilter: "",
     };
   },
   created: function() {

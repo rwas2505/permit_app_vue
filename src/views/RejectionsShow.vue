@@ -13,15 +13,14 @@
       <p>rejection_source: {{ rejection.rejection_source }}</p>
       <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
       <!-- <img v-bind:src="`${rejection.upload_url}`"> -->
-      <p>upload_url: {{rejection.upload_url}}</p>
-      <br>
-      <a v-bind:href="`${rejection.upload_url}`">PDF LINK</a>
-
-
-
-
-      <p><a style="color:Dodgerblue;">Job Link</a></p>
-    <a class="btn btn-primary" v-bind:href="`/rejections/${rejection.id}/edit`" role="button">Edit </a>
+      <!-- <p>upload_url: {{rejection.upload_url}}</p> -->
+      <div v-if="rejection.upload_array">
+        <p><i class="far fa-file-pdf"></i> <a v-bind:href="`${rejection.upload_url}`"> View Correction Upload</a></p>  
+        <!-- <p>arary: {{rejection.upload_array}}</p> -->
+      </div>
+      <p><a class="btn btn-primary" v-bind:href="`/rejections/${rejection.id}/edit`" role="button">Edit </a></p>
+      <!-- <WebViewer :path="`${publicPath}lib`" :url="`${rejection.upload_url}`"/> -->
+      <!-- <p><a style="color:Dodgerblue;">Job Link</a></p> --> 
   </div>
 </template>
 
@@ -30,11 +29,16 @@
 
 <script>
 import axios from "axios";
+import WebViewer from '../components/WebViewer.vue';
 
 export default {
+  components: {
+    WebViewer
+  },
   data: function() {
     return {
-      rejection: {}
+      rejection: {},
+      publicPath: process.env.BASE_URL,
     };
   },
   created: function() {

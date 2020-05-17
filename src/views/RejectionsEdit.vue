@@ -70,15 +70,33 @@
                 <label for="exampleFormControlSelect1">Note</label>
                 <input class="form-control" id="exampleFormControlSelect1" v-model="rejection.note">                  
               </div>
+              <br>
             <!-- </div> -->
             <br>
           </form>
+          <div class="container">
           <input type="submit" class="btn btn-success" value="Submit"> |
-          <a class="btn btn-warning" v-bind:href="`/rejections/${rejection.id}`" role="button">Cancel </a> |
-          <a v-if="deleteConfirmation" class="btn btn-danger" v-on:click="delConfirmation()">Delete</a>
-          <a v-if="!deleteConfirmation" class="btn btn-outline-danger" v-on:click="deleteRejection()">Click again to delete</a> 
+            <a class="btn btn-warning" v-bind:href="`/rejections/${rejection.id}`" role="button">Cancel </a> |
+            <a v-if="deleteConfirmation" class="btn btn-danger" v-on:click="delConfirmation()">Delete</a>
+            <a v-if="!deleteConfirmation" class="btn btn-outline-danger" v-on:click="deleteRejection()">Click again to delete</a> |
+            <a class="btn btn-success" v-on:click="showFileUpload()">Add PDF</a>
+          </div>
         <hr>
       </form>
+      <div v-if="displayUpload" class="container">
+        <div class ="col"> 
+              <p><label for="exampleFormControlSelect1">Add PDF</label></p>
+              <input 
+              style="display: none" 
+              type="file" 
+              @change="onFileSelected($event)" 
+              multiple
+              ref="fileInput">
+              <button @click="$refs.fileInput.click()">Pick a File</button>
+              <button @click="onUpload()">Upload</button>
+        </div>
+        <hr>
+      </div> 
     </div>
   </div>
 </template>
@@ -89,6 +107,8 @@ import axios from 'axios';
 export default {
   data: function() {
     return {
+      selectedFile: null,
+      displayUpload: false,
       rejection: {},
       rejections: [],
       errors: [],
@@ -147,6 +167,33 @@ export default {
   },
 
   methods: {
+    showFileUpload: function() {
+      this.displayUpload = !this.displayUpload;
+    },
+    onFileSelected: function(event) {
+      console.log(event);
+      console.log("FILE SELECTED");
+      this.selectedFile = event.target.files[0];
+      console.log(this.selectedFile);
+    },
+    onUpload() {
+      console.log('uploading...');
+      var uploads = new FormData();
+      uploads.append('uploads', this.selectedFile, this.selectedFile.name);
+      axios.patch(`/api/rejections/${this.rejection.id}`, uploads, {
+        onUploadProgress: uploadEvent => {
+          console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%');
+        }
+      }).then(res => {
+        console.log(res.data);
+        this.$router.push(`/rejections/${this.rejection.id}`);
+      })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+          console.log(error.response.status);
+          this.status = error.response.status;
+        });
+    },
     submit: function() {
       var params = {
         category: this.rejection.category,
