@@ -12,9 +12,12 @@
       <p>level_reviewed: {{ rejection.level_reviewed }}</p>
       <p>rejection_source: {{ rejection.rejection_source }}</p>
       <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
-      <!-- <a href="../../../../../99bottles/99bottles.pdf">99 Bottles</a> -->
-      <img v-bind:src="`${rejection.upload_url}`">
-      <a href="`${rejection.upload_url}`"> picture </a>
+      <!-- <img v-bind:src="`${rejection.upload_url}`"> -->
+      <p>upload_url: {{rejection.upload_url}}</p>
+      <br>
+      <a v-bind:href="`${rejection.upload_url}`">PDF LINK</a>
+
+
 
 
       <p><a style="color:Dodgerblue;">Job Link</a></p>
