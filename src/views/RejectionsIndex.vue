@@ -1,5 +1,16 @@
-<template>
+<template>  
   <div class="rejections-index">
+      <div class="csv">
+        <download-csv
+            class   = "btn btn-default"
+            :data   = "json_data"
+            name    = "permit_app_report.csv">
+        
+            Download CSV (This is a slot)
+        
+        </download-csv>  
+      </div>
+
     <section class="wrapper style1" style="text-align: center;">
       <h1>{{ message }}</h1>
       <div id="container" class="container">
@@ -125,6 +136,7 @@ export default {
   mixins: [Vue2Filters.mixin],
   data: function() {
     return {
+      json_data: [],
       message: "All Entries",
       pageSearch: "",
       categorySelect: "All",
@@ -296,6 +308,9 @@ export default {
         // console.log(filtered);
         this.filteredRejections = filtered;
       }
+      this.json_data = this.filteredRejections;
+      console.log("JSON DATA: ");
+      console.log(this.json_data);
     }
   }
 };

@@ -11,6 +11,7 @@ import CategoryData from '../views/CategoryData.vue';
 import AhjData from '../views/AhjData.vue';
 import Charts from '../views/Charts.vue';
 import Upload from '../views/Upload.vue';
+import Csv from '../views/Csv.vue';
 // import WebViewer from '../views/WebViewer.vue';
 
 Vue.use(VueRouter);
@@ -79,6 +80,12 @@ const routes = [
     name: 'upload-display',
     component: Upload
   },
+  {
+    path: '/csv',
+    name: 'csv-display',
+    component: Csv
+  },
+
   // {
   //   path: '/webviewer',
   //   name: 'webviewer-display',
