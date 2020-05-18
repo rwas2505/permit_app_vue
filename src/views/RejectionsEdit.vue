@@ -1,10 +1,11 @@
 <template>
-  <div class="edit-rejection">
+  <div class="edit-rejection" >
     <div class="container">
       <form v-on:submit.prevent="submit()">
-        <h1>Edit Rejection</h1>
           <form>
-            <!-- <div class="form-row"> -->
+            <br>
+            <div style="background-color: #C0C0C0;" >
+            <h1 style="color: #343a40;"> <i class="fas fa-edit" style="color: Dodgerblue; padding-left: 2%;"></i> Edit Rejection</h1>
               <div class="col">
                 <label for="exampleFormControlSelect1">Category</label>
                 <select class="form-control" id="categorySelect" v-model="rejection.category">
@@ -29,8 +30,6 @@
                   <option v-for="office in uniqueOffices">{{ office }}</option>
                 </select>
               </div>
-            <!-- </div> -->
-            <!-- <div class="form-row"> -->
               <div class="col">
                 <label for="exampleFormControlSelect1">State</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="rejection.state">
@@ -56,13 +55,6 @@
                 </select>
               </div>
               <div class="col">
-                <label for="exampleFormControlSelect1">Corrections Uploaded</label>
-                <select class="form-control" id="exampleFormControlSelect1" v-model="rejection.corrections_uploaded">
-                  <option>True</option>
-                  <option>False</option>
-                </select>
-              </div>
-              <div class="col">
                 <label for="exampleFormControlSelect1">Installation ID</label>
                 <input class="form-control" id="exampleFormControlSelect1" v-model="rejection.installation">                  
               </div>
@@ -71,8 +63,8 @@
                 <input class="form-control" id="exampleFormControlSelect1" v-model="rejection.note">                  
               </div>
               <br>
-            <!-- </div> -->
-            <br>
+             <br>
+            </div>
           </form>
           <div class="container">
           <input type="submit" class="btn btn-success" value="Submit"> |
@@ -87,12 +79,11 @@
         <div class ="col"> 
               <p><label for="exampleFormControlSelect1">Add PDF</label></p>
               <input 
-              style="display: none" 
               type="file" 
               @change="onFileSelected($event)" 
               multiple
               ref="fileInput">
-              <button @click="$refs.fileInput.click()">Pick a File</button>
+              <!-- <button @click="$refs.fileInput.click()">Pick a File</button> -->
               <button @click="onUpload()">Upload</button>
         </div>
         <hr>
@@ -207,7 +198,7 @@ export default {
         installation: this.rejection.installation,
         level_reviewed: this.rejection.level_reviewed,
         rejection_source: this.rejection.rejection_source,
-        corrections_uploaded: this.rejection.corrections_uploaded
+        // corrections_uploaded: this.rejection.corrections_uploaded
       };
       console.log('params are below');
       console.log(params);

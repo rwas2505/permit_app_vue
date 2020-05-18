@@ -109,8 +109,8 @@
           <section class="col-12 col-12-narrower" style="text-align: center;">
             <div class="box post">
               <!-- <a href="#" class="image left"><img src="images/pic01.jpg" alt="" /></a> -->
-              <div>
-                <a v-bind:href="`/rejections/${rejection.id}`" class="fas fa-clipboard-check" style="font-size: 48px; color: Dodgerblue;"></a>
+              <!-- <div> -->
+                <!-- <a v-bind:href="`/rejections/${rejection.id}`" class="fas fa-clipboard-check" style="font-size: 48px; color: Dodgerblue;"></a>
                 <p>id: {{ rejection.id }}</p>
                 <p>installation: {{ rejection.installation }}</p>
                 <p>category: {{ rejection.category }}</p>
@@ -122,11 +122,33 @@
                 <p>note: {{ rejection.note }}</p>
                 <p>level_reviewed: {{ rejection.level_reviewed }}</p>
                 <p>rejection_source: {{ rejection.rejection_source }}</p>
-                <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
+                <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p> -->
+              <div class="card" style="width: 54rem;">
+                <div class="card-header" style="background-color: #343a40"> 
+                  <h3> <a v-bind:href="`/rejections/${rejection.id}`" class="fas fa-clipboard-check" style="font-size: 48px; color: Dodgerblue;"></a>   </h3>
+                </div>
+                <ul class="list-group list-group-flush" style="background-color: rgb(152, 161, 172);">
+                  <li class="list-group-item" style="background-color: #C0C0C0;">id: {{ rejection.id }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">installation: {{ rejection.installation }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">category: {{ rejection.category }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">sub_category: {{ rejection.sub_category }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">product: {{ rejection.product }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">office: {{ rejection.office }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">state: {{ rejection.state }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">ahj: {{ rejection.ahj }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">note: {{ rejection.note }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">level_reviewed: {{ rejection.level_reviewed }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">rejection_source: {{ rejection.rejection_source }}</li>
+                  <div v-if="rejection.upload_array">
+                    <li class="list-group-item"><i class="far fa-file-pdf"></i> <a v-bind:href="`${rejection.upload_url}`"> View Correction Upload</a></li>  
+                  </div>
+                </ul>
+              </div>
+
                 <hr>
                 <hr>
               </div>
-            </div>
+            <!-- </div> -->
           </section>
         </div>
       </div>

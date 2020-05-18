@@ -2,9 +2,10 @@
   <div class="new-rejection">
     <div class="container">
       <form v-on:submit.prevent="submit()">
-        <h1>New Permit Rejection Entry</h1>
           <form>
-            <!-- <div class="form-row"> -->
+            <br>
+            <div style="background-color: #C0C0C0;" >
+            <h1 style="color: #343a40;"><i class="fas fa-plus-circle" style="color: Dodgerblue;"></i> New Entry</h1>
               <div class="col">
                 <label for="exampleFormControlSelect1">Category</label>
                 <select class="form-control" id="categorySelect" v-model="categorySelect">
@@ -29,8 +30,6 @@
                   <option v-for="office in uniqueOffices">{{ office }}</option>
                 </select>
               </div>
-            <!-- </div> -->
-            <!-- <div class="form-row"> -->
               <div class="col">
                 <label for="exampleFormControlSelect1">State</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="stateSelect">
@@ -56,21 +55,15 @@
                 </select>
               </div>
               <div class="col">
-                <label for="exampleFormControlSelect1">Corrections Uploaded</label>
-                <select class="form-control" id="exampleFormControlSelect1" v-model="correctionsUploadedSelect">
-                  <option>True</option>
-                  <option>False</option>
-                </select>
-              </div>
-              <div class="col">
                 <label for="exampleFormControlSelect1">Installation ID</label>
                 <input class="form-control" id="exampleFormControlSelect1" v-model="installationIdSelect">                  
               </div>
               <div class="col">
                 <label for="exampleFormControlSelect1">Note</label>
-                <input class="form-control" id="exampleFormControlSelect1" v-model="noteSelect">                  
+                <input class="form-control" id="exampleFormControlSelect1" v-model="noteSelect">          
+                <br></br>        
               </div>
-            <!-- </div> -->
+            </div>
             <br>
           </form>
         <input type="submit" class="btn btn-primary" value="Submit">
@@ -146,7 +139,7 @@ export default {
         installation: this.installationIdSelect,
         level_reviewed: this.levelReviewedSelect,
         rejection_source: this.rejectionSourceSelect,
-        corrections_uploaded: this.correctionsUploadedSelect,
+        // corrections_uploaded: this.correctionsUploadedSelect,
       };
       console.log(params);
       axios

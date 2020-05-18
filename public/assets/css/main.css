@@ -2528,11 +2528,6 @@ input, select, textarea {
 		}
 
 /* Header */
-	#logo {
-		background-color: rgb(152, 161, 172);
-		padding: 0;
-		margin: 0;
-	}
 
 	#header {
 		text-align: center;
@@ -3384,3 +3379,37 @@ input, select, textarea {
 
 	#chartHead{
 	}
+
+	#rejections-show {
+		background-color: red;
+	}
+
+.card {
+		margin: 0 auto; /* Added */
+		float: none; /* Added */
+		margin-bottom: 10px; /* Added */
+}
+
+.rejections-show {
+	background-image: url("");
+	background-repeat: no-repeat;
+	object-fit: fill;
+
+}
+
+
+#logo {
+	background-color: rgb(152, 161, 172);
+	/* background-image: url("https://image.shutterstock.com/image-photo/black-tuff-brick-wall-wide-600w-1435250648.jpg"); */
+	padding: 0;
+	margin: 0;
+	height: 130px;
+}
+
+#list-group-item {
+	background-color: red;
+}
+
+#edit-rejection {
+	width: 100 px;
+}
