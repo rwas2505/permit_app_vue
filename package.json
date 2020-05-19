@@ -4,15 +4,20 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "postinstall": "npm run download-webviewer",
+    "download-webviewer": "npx @pdftron/webviewer-downloader"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "buefy": "^0.8.19",
     "core-js": "^3.6.4",
+    "file-saver": "^2.0.2",
     "jquery": "^3.5.0",
     "popper.js": "^1.16.1",
     "vue": "^2.6.11",
+    "vue-json-csv": "^1.2.11",
     "vue-router": "^3.1.6",
     "vue2-filters": "^0.11.0"
   },

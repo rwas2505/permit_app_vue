@@ -1,8 +1,27 @@
-<template>
+<template>  
   <div class="rejections-index">
-    <h1>{{ message }}</h1>
-       <button v-on:click="filterOptions()" type="button" class="btn btn-outline-secondary">Hide/Show Filters</button>
-      <div v-if="showFilter">
+      <div class="csv">
+        <download-csv
+            class   = "btn btn-default"
+            :data   = "json_data"
+            name    = "permit_app_report.csv">
+            <button type="button" class="btn btn-link">Download CSV</button>
+            <!-- Download CSV (This is a slot) -->
+  
+        </download-csv>  
+      </div>
+
+    <section class="wrapper style1" style="text-align: center;">
+      <h1>{{ message }}</h1>
+      <!-- <div id="container" class="container"> -->
+        <!-- <div class="row"> -->
+          <!-- <div class="col-md-12 text-center">
+            <input style="width:350px;" class="justify-content-center" type="search" placeholder="Search Filtered Results" aria-label="Search" v-model="pageSearch">
+          </div>   -->
+        <!-- </div> -->
+      <!-- </div> -->
+      <button v-on:click="filterOptions()" type="button" class="btn btn-outline-secondary" style="text-align: center;">Show/Hide Filters</button>
+      <div v-if="showFilter" style=" margin-left: 50px; margin-right: 50px;">
         <ul class="nav justify-content-center">
           <form>
             <div class="form-row">
@@ -17,7 +36,7 @@
                 <label for="exampleFormControlSelect1">Sub Category</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="subCategorySelect">
                   <option>All</option>
-                  <option>Best Practices</option>
+                  <option v-for="subCategory in uniqueSubCategories">{{ subCategory }}</option>
                 </select>
               </div>
               <div class="col">
@@ -31,7 +50,7 @@
                 <label for="exampleFormControlSelect1">Office</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="officeSelect">
                   <option>All</option>
-                  <option>Norristown</option>
+                  <option v-for="office in uniqueOffices">{{ office }}</option>
                 </select>
               </div>
             </div>
@@ -40,14 +59,14 @@
                 <label for="exampleFormControlSelect1">State</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="stateSelect">
                   <option>All</option>
-                  <option>PA</option>
+                  <option v-for="state in uniqueStates">{{ state }}</option>
                 </select>
               </div>
               <div class="col">
                 <label for="exampleFormControlSelect1">AHJ</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="ahjSelect">
                   <option>All</option>
-                  <option>Borough of Middletown (PA)</option>
+                  <option v-for="ahj in uniqueAhjs">{{ ahj }}</option>
                 </select>
               </div>
               <div class="col">
@@ -70,23 +89,70 @@
           </form>
         </ul>
       </div>
-    <hr>
-    <div v-for="rejection in filteredRejections">
-      <p><a v-bind:href="`/rejections/${rejection.id}`"> id: {{ rejection.id }}</a></p>
-      <p>installation: {{ rejection.installation }}</p>
-      <p>category: {{ rejection.category }}</p>
-      <p>sub_category: {{ rejection.sub_category }}</p>
-      <p>product: {{ rejection.product }}</p>
-      <p>office: {{ rejection.office }}</p>
-      <p>state: {{ rejection.state }}</p>
-      <p>ahj: {{ rejection.ahj }}</p>
-      <p>note: {{ rejection.note }}</p>
-      <p>level_reviewed: {{ rejection.level_reviewed }}</p>
-      <p>rejection_source: {{ rejection.rejection_source }}</p>
-      <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p>
-      <hr>
-      <hr>
-    </div>
+      <br></br>
+      <div id="calculations">
+        <p>Total number of entries: {{rejections.length}}</p>
+        <p>Number of filtered results: {{filteredRejections.length}}</p>
+        <p>Filtered results as a percentage of total: {{((filteredRejections.length/rejections.length)*100).toFixed(2)}}%</p>
+      </div>
+      <br>
+      <div id="container" class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <input style="width:350px;" class="justify-content-center" type="search" placeholder="Search Filtered Results" aria-label="Search" v-model="pageSearch">
+          </div>  
+        </div>
+      </div>
+
+      <div class="container" v-for="rejection in filterBy(filteredRejections, pageSearch)">
+        <div class="row">
+          <section class="col-12 col-12-narrower" style="text-align: center;">
+            <div class="box post">
+              <!-- <a href="#" class="image left"><img src="images/pic01.jpg" alt="" /></a> -->
+              <!-- <div> -->
+                <!-- <a v-bind:href="`/rejections/${rejection.id}`" class="fas fa-clipboard-check" style="font-size: 48px; color: Dodgerblue;"></a>
+                <p>id: {{ rejection.id }}</p>
+                <p>installation: {{ rejection.installation }}</p>
+                <p>category: {{ rejection.category }}</p>
+                <p>sub_category: {{ rejection.sub_category }}</p>
+                <p>product: {{ rejection.product }}</p>
+                <p>office: {{ rejection.office }}</p>
+                <p>state: {{ rejection.state }}</p>
+                <p>ahj: {{ rejection.ahj }}</p>
+                <p>note: {{ rejection.note }}</p>
+                <p>level_reviewed: {{ rejection.level_reviewed }}</p>
+                <p>rejection_source: {{ rejection.rejection_source }}</p>
+                <p>corrections_uploaded: {{ rejection.corrections_uploaded }}</p> -->
+              <div class="card" style="width: 54rem;">
+                <div class="card-header" style="background-color: #343a40"> 
+                  <h3> <a v-bind:href="`/rejections/${rejection.id}`" class="fas fa-clipboard-check" style="font-size: 48px; color: Dodgerblue;"></a>   </h3>
+                </div>
+                <ul class="list-group list-group-flush" style="background-color: rgb(152, 161, 172);">
+                  <li class="list-group-item" style="background-color: #C0C0C0;">id: {{ rejection.id }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">installation: {{ rejection.installation }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">category: {{ rejection.category }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">sub_category: {{ rejection.sub_category }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">product: {{ rejection.product }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">office: {{ rejection.office }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">state: {{ rejection.state }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">ahj: {{ rejection.ahj }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">note: {{ rejection.note }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">level_reviewed: {{ rejection.level_reviewed }}</li>
+                  <li class="list-group-item" style="background-color: #C0C0C0;">rejection_source: {{ rejection.rejection_source }}</li>
+                  <div v-if="rejection.upload_array">
+                    <li class="list-group-item"><i class="far fa-file-pdf"></i> <a v-bind:href="`${rejection.upload_url}`"> View Correction Upload</a></li>  
+                  </div>
+                </ul>
+              </div>
+
+                <hr>
+                <hr>
+              </div>
+            <!-- </div> -->
+          </section>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -101,7 +167,9 @@ export default {
   mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      message: "All Entries Live Here",
+      json_data: [],
+      message: "All Entries",
+      pageSearch: "",
       categorySelect: "All",
       subCategorySelect: "All",
       productSelect: "All",
@@ -124,36 +192,105 @@ export default {
         "SolarRoof Requirements"
       ],
       products: [
-        "Solar Roof", 
+        "Flat Plate",
         "Powerwall", 
-        "Flat Plate"
+        "Solar Roof" 
       ],
       levelsReviewed: [
-        "When submitting, AHJ would NOT allow submittal", 
-        "Submitted successfully, received rejection", 
         "Online submittal method required additional info that was not available",
+        "Submitted successfully, received rejection", 
+        "When submitting, AHJ would NOT allow submittal", 
       ],
       rejectionSources: [
+        "As Built Does Not Match Approved Plans",
+        "Conditional AHJ Approval",	
+        "Incorrect AHJ Assigned",	
         "New AHJ Requirement",	
+        "PIDM Review", 
         "Unique Requirement",	
         "Unknown Source",	
-        "Incorrect AHJ Assigned",	
-        "Conditional AHJ Approval",	
-        "PIDM Review", 
-        "As Built Does Not Match Approved Plans"
-      ]
+      ],
+      uniqueStates: [],
+      uniqueAhjs: [],
+      uniqueOffices: [],
+      uniqueSubCategories: []
     };
   },
   created: function() {
     console.log('in the created');
-    console.log("this is outside the callback");
+    // console.log("this is outside the callback");
     axios.get("/api/rejections").then(response=> {
-      console.log("this is inside the callback");
+      // console.log("this is inside the callback");
       console.log(response.data);
       this.rejections = response.data;
+      this.filteredRejections = this.rejections;
+      this.makeStatesArray();
+      this.makeAhjsArray();
+      this.makeOfficesArray();
+      this.makeSubCategoriesArray();
     });
   },
   methods: {
+    makeOfficesArray: function() {
+      var offices = [];
+      // add an instance of office for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        offices.push(rejection.office);
+      });
+
+      // create an array with only unique offices sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueOffices = offices.filter( onlyUnique ).sort();
+      // console.log(this.uniqueOffices);
+    },
+    makeSubCategoriesArray: function() {
+      var subCategories = [];
+      // add an instance of sub_category for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        subCategories.push(rejection.sub_category);
+      });
+
+      // create an array with only unique sub_categories sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueSubCategories = subCategories.filter( onlyUnique ).sort();
+      // console.log(this.uniqueSubCategories);
+    },
+
+    makeStatesArray: function() {
+      var states = [];
+      // add an instance of state for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        states.push(rejection.state);
+      });
+
+      // create an array with only unique states sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueStates = states.filter( onlyUnique ).sort();
+    },
+    makeAhjsArray: function() {
+
+      var ahjs = [];
+      // add an instance of an ahj for each rejection to a new array
+      this.rejections.forEach(function(rejection) {
+        ahjs.push(rejection.ahj);
+      });
+
+      // create an array with only unique ahjs sorted
+      // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+      function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+      }
+      this.uniqueAhjs = ahjs.filter( onlyUnique ).sort();
+    },
     filterOptions: function() {
       this.showFilter = !this.showFilter;
     },
@@ -202,6 +339,9 @@ export default {
         // console.log(filtered);
         this.filteredRejections = filtered;
       }
+      this.json_data = this.filteredRejections;
+      console.log("JSON DATA: ");
+      console.log(this.json_data);
     }
   }
 };

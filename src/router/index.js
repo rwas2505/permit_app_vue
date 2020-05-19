@@ -5,9 +5,16 @@ import RejectionsIndex from '../views/RejectionsIndex.vue';
 import RejectionsNew from '../views/RejectionsNew.vue';
 import RejectionsShow from '../views/RejectionsShow.vue';
 import RejectionsEdit from '../views/RejectionsEdit.vue';
-import DataDisplay from '../views/DataDisplay.vue';
+import LocationData from '../views/LocationData.vue';
+import ProductData from '../views/ProductData.vue';
+import CategoryData from '../views/CategoryData.vue';
+import AhjData from '../views/AhjData.vue';
+import Charts from '../views/Charts.vue';
+import Upload from '../views/Upload.vue';
+import Csv from '../views/Csv.vue';
+// import WebViewer from '../views/WebViewer.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -44,10 +51,47 @@ const routes = [
     component: RejectionsEdit
   },
   {
-    path: '/data',
-    name: 'data-display',
-    component: DataDisplay
-  }
+    path: '/data/location',
+    name: 'location-display',
+    component: LocationData
+  },
+  {
+    path: '/data/product',
+    name: 'product-display',
+    component: ProductData
+  },
+  {
+    path: '/data/category',
+    name: 'category-display',
+    component: CategoryData
+  },
+  {
+    path: '/data/ahj',
+    name: 'ahj-display',
+    component: AhjData
+  },
+  {
+    path: '/charts',
+    name: 'chart-display',
+    component: Charts
+  },
+  {
+    path: '/upload',
+    name: 'upload-display',
+    component: Upload
+  },
+  {
+    path: '/csv',
+    name: 'csv-display',
+    component: Csv
+  },
+
+  // {
+  //   path: '/webviewer',
+  //   name: 'webviewer-display',
+  //   component: WebViewer
+  // }  
+
 ];
 
 const router = new VueRouter({
