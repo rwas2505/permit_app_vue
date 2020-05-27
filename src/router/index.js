@@ -12,6 +12,7 @@ import AhjData from '../views/AhjData.vue';
 import Charts from '../views/Charts.vue';
 import Upload from '../views/Upload.vue';
 import Csv from '../views/Csv.vue';
+import JobsIndex from '../views/JobsIndex.vue';
 // import WebViewer from '../views/WebViewer.vue';
 
 Vue.use(VueRouter);
@@ -84,6 +85,11 @@ const routes = [
     path: '/csv',
     name: 'csv-display',
     component: Csv
+  },
+  {
+    path: '/jobs',
+    name: 'jobs-display',
+    component: JobsIndex
   },
 
   // {

@@ -29,7 +29,6 @@
                 <label for="exampleFormControlSelect1">Category</label>
                 <select class="form-control" id="categorySelect" v-model="categorySelect">
                   <option>All</option>
-                  <option v-for="category in categories">{{ category }}</option>
                 </select>
               </div>
               <div class="col">
