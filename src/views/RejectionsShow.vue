@@ -6,24 +6,28 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" style="background-color: #C0C0C0;">id: {{ rejection.id }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">installation: {{ rejection.installation }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">category: {{ rejection.category }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">sub_category: {{ rejection.sub_category }}</li>
         <li class="list-group-item" style="background-color: #C0C0C0;">product: {{ rejection.product }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">office: {{ rejection.office }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">state: {{ rejection.state }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">ahj: {{ rejection.ahj }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">note: {{ rejection.note }}</li>
         <li class="list-group-item" style="background-color: #C0C0C0;">level_reviewed: {{ rejection.level_reviewed }}</li>
         <li class="list-group-item" style="background-color: #C0C0C0;">rejection_source: {{ rejection.rejection_source }}</li>
-        <div v-if="rejection.upload_array">
-          <li class="list-group-item"><i class="far fa-file-pdf"></i> <a v-bind:href="`${rejection.upload_url}`"> View Correction Upload</a></li>  
-        </div>
+        <li class="list-group-item" style="background-color: #C0C0C0;">corrections_uploaded: {{ rejection.corrections_uploaded }}</li>
+        <li class="list-group-item" style="background-color: #C0C0C0;">job_id: {{ rejection.job_id }}</li>
       </ul>
+      <div v-for="(category, index) in rejection.categories">
+        <div class="card-header" style="background-color: #343a40; color: #C0C0C0;">
+          <h3> CATEGORY {{index + 1}}</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" style="background-color: #C0C0C0;">id: {{ category.id}}</li>
+          <li class="list-group-item" style="background-color: #C0C0C0;">name: {{ category.name}}</li>
+        </ul>
+        <hr>
+        <div v-for="subcategory in rejection.subcategories">
+          <div v-if="subcategory.category_id === category.id">
+            <p>Subcategory:{{subcategory}}</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <p><a class="btn btn-primary" v-bind:href="`/rejections/${rejection.id}/edit`" role="button">Edit </a></p>
-    <!-- <WebViewer :path="`${publicPath}lib`" :url="`${rejection.upload_url}`"/> -->
-    <!-- <p><a style="color:Dodgerblue;">Job Link</a></p> --> 
   </div>
 </template>
 
@@ -42,6 +46,7 @@ export default {
     return {
       rejection: {},
       publicPath: process.env.BASE_URL,
+      number: 0,
     };
   },
   created: function() {
@@ -50,6 +55,11 @@ export default {
       console.log(response.data);
       this.rejection = response.data;
     }); 
+  },
+  methods: {
+    // increment: function() {
+    //   this.number++;
+    // }
   }
 };
 </script>

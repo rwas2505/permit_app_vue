@@ -3,7 +3,7 @@
     <section class="wrapper style1" style="text-align: center;">
       <h1> {{ message }} </h1>
       <div v-for="job in jobs"> 
-        <a style="color:blue;">{{job.installation_id}}</a>
+        <a style="color:blue;" v-bind:href="`/jobs/${job.id}`">{{job.installation_id}}</a>
         <br></br>
         <p>job number: {{job.job_number }}</p>
         <p>state: {{job.state }}</p>

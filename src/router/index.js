@@ -13,6 +13,7 @@ import Charts from '../views/Charts.vue';
 import Upload from '../views/Upload.vue';
 import Csv from '../views/Csv.vue';
 import JobsIndex from '../views/JobsIndex.vue';
+import JobsShow from '../views/JobsShow.vue';
 // import WebViewer from '../views/WebViewer.vue';
 
 Vue.use(VueRouter);
@@ -91,6 +92,12 @@ const routes = [
     name: 'jobs-display',
     component: JobsIndex
   },
+  {
+    path: '/jobs/:id',
+    name: 'jobs-show',
+    component: JobsShow
+  },
+  
 
   // {
   //   path: '/webviewer',
