@@ -11,9 +11,11 @@
         <li class="list-group-item" style="background-color: #C0C0C0;">ahj: {{ job.ahj }}</li>
         <li class="list-group-item" style="background-color: #C0C0C0;">office: {{ job.office }}</li>
         <li class="list-group-item" style="background-color: #C0C0C0;">rejection count: {{ job.rejection_count }}</li>
-        <div v-for="rejection in job.rejections">
+        <div v-for="(rejection, index) in job.rejections">
           <li class="list-group-item" style="background-color: #343a40;"></li>
-        <li class="list-group-item" style="background-color: #C0C0C0;"><a v-bind:href="`/rejections/${rejection.id}`">REJECTION</a></li>
+        <li class="list-group-item" style="background-color: #C0C0C0;"><a v-bind:href="`/rejections/${rejection.id}`">Rejection {{index + 1}}</a></li>
+          <li class="list-group-item" style="background-color: #C0C0C0;">Date Entered: {{ rejection.create_at | moment }}
+</li>
           <li class="list-group-item" style="background-color: #C0C0C0;">id: {{ rejection.id }}</li>
           <li class="list-group-item" style="background-color: #C0C0C0;">product: {{ rejection.product }}</li>
           <li class="list-group-item" style="background-color: #C0C0C0;">level reviewed: {{ rejection.level_reviewed }}</li>
@@ -33,6 +35,8 @@
 <script>
 import axios from "axios";
 import WebViewer from '../components/WebViewer.vue';
+import moment from 'moment';
+
 
 export default {
   components: {
@@ -52,6 +56,11 @@ export default {
     }); 
   },
   methods: {
+  },
+  filters: {
+    moment: function(date) {
+      return moment(date).format('MMMM Do YYYY');
+    }
   }
 };
 </script>
