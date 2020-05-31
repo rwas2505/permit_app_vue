@@ -21,11 +21,17 @@
         <div v-for="(subcategory, index) in rejection.subcategories">
           <div v-if="subcategory.category_id === category.id">
             <li class="list-group-item" style="background-color: #C0C0C0;">Subcategory {{index + 1}}: {{subcategory.name}}</li>
+            <div v-for="(note, index) in rejection.notes">
+              <div v-if="note.subcategory_id===subcategory.id">
+                <p>Note {{index + 1}}: {{note.text}}</p>
+              </div>
+            </div>
           </div>
         </div>
         </ul>
         <hr>
       </div>
+      <!-- <p>{{rejection.notes}}</p> -->
     </div>
   </div>
 </template>
