@@ -1,35 +1,46 @@
 <template>
   <div class="rejections-show" style="text-align: center; margin-top: 25px;">
     <div class="card" style="width: 54rem;">
-      <div class="card-header" style="background-color: #343a40; color: #C0C0C0;">
-        <h3> <a v-bind:href="`/rejections`" class="fas fa-clipboard-check" style="font-size: 48px; color: Dodgerblue;"></a></h3>
+      <div class="card-header" style="background-color: #343a40; color: DodgerBlue;">
+        <h3>Permit Rejection Information </h3>
+        <span v-on:click="toggleRejectionInfo" style="font-size:12px;">toggle info</span>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item" style="background-color: #C0C0C0;">REJECTION ID: {{ rejection.id }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">product: {{ rejection.product }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">level_reviewed: {{ rejection.level_reviewed }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">rejection_source: {{ rejection.rejection_source }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">corrections_uploaded: {{ rejection.corrections_uploaded }}</li>
-        <li class="list-group-item" style="background-color: #C0C0C0;">job_id: {{ rejection.job_id }}</li>
-      </ul>
-      <hr>
-      <div v-for="(category, index) in rejection.categories">
-        <div class="card-header" style="background-color: #343a40; color: #C0C0C0;">
-          <h3> Category {{index + 1}}: {{category.name}}</h3><h6>id:{{category.id}}</h6>
-        </div>
+
+      <div v-if="toggleInfo">
         <ul class="list-group list-group-flush">
-        <div v-for="(subcategory, index) in rejection.subcategories">
-          <div v-if="subcategory.category_id === category.id">
-            <li class="list-group-item" style="background-color: #C0C0C0;">Subcategory {{index + 1}}: {{subcategory.name}}</li>
-            <div v-for="(note, index) in rejection.notes">
-              <div v-if="note.subcategory_id===subcategory.id">
-                <p>Note {{index + 1}}: {{note.text}}</p>
+          <li class="list-group-item" style="background-color: #C0C0C0;">REJECTION ID: {{ rejection.id }}</li>
+          <li class="list-group-item" style="background-color: #C0C0C0;">product: {{ rejection.product }}</li>
+          <li class="list-group-item" style="background-color: #C0C0C0;">level_reviewed: {{ rejection.level_reviewed }}</li>
+          <li class="list-group-item" style="background-color: #C0C0C0;">rejection_source: {{ rejection.rejection_source }}</li>
+          <li class="list-group-item" style="background-color: #C0C0C0;">corrections_uploaded: {{ rejection.corrections_uploaded }}</li>
+          <li class="list-group-item" style="background-color: #C0C0C0;">job_id: {{ rejection.job_id }}</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <div v-for="(category, index) in rejection.categories">
+        <div class="card-header" style="background-color: #343a40; color: DodgerBlue;">
+          <h4> Category {{index + 1}}: {{category.name}}</h4>
+          <span v-on:click="toggleCategoryInfo" style="font-size:12px;">toggle info</span>
+        </div>
+
+        <div v-if="toggleCategory">
+          <ul class="list-group list-group-flush">
+          <div v-for="(subcategory, index) in rejection.subcategories">
+            <div v-if="subcategory.category_id === category.id">
+              <li class="list-group-item" style="background-color: #C0C0C0;">Subcategory {{index + 1}}: {{subcategory.name}}</li>
+              <div v-for="(note, index) in rejection.notes">
+                <div v-if="note.subcategory_id===subcategory.id">
+                  <p>Note {{index + 1}}: {{note.text}}</p>
+                </div>
               </div>
             </div>
           </div>
+          </ul>
+          <hr>
         </div>
-        </ul>
-        <hr>
+      <hr>
       </div>
       <!-- <p>{{rejection.notes}}</p> -->
     </div>
@@ -52,6 +63,8 @@ export default {
       rejection: {},
       publicPath: process.env.BASE_URL,
       number: 0,
+      toggleInfo: false,
+      toggleCategory: false,
     };
   },
   created: function() {
@@ -62,9 +75,13 @@ export default {
     }); 
   },
   methods: {
-    // increment: function() {
-    //   this.number++;
-    // }
+    toggleRejectionInfo: function() {
+      this.toggleInfo = !this.toggleInfo;
+      console.log(this.toggleInfo)
+    },
+    toggleCategoryInfo: function() {
+      this.toggleCategory = !this.toggleCategory;
+    }
   }
 };
 </script>

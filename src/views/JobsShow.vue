@@ -25,7 +25,7 @@
   
 
 
-            <div v-if="rejection.id === rejectionId">
+            <div v-if="showRejectionInfo">
               <li class="list-group-item" style="background-color: #C0C0C0;">Date Entered: {{ rejection.create_at | moment }}</li>
               <li class="list-group-item" style="background-color: #C0C0C0;">id: {{ rejection.id }}</li>
               <li class="list-group-item" style="background-color: #C0C0C0;">product: {{ rejection.product }}</li>
@@ -77,8 +77,10 @@ export default {
       console.log("showJobInfo: " + this.showJobInfo);
     },
     toggleRejectionInfo: function() {
-      this.rejectionId = this.rejection.id;
+      this.showRejectionInfo = !this.showRejectionInfo;
       console.log("showRejectionInfo: " + this.showRejectionInfo);
+      // console.log("rejection.id: " +this.job.rejections)
+      console.log("this: " + this.job.rejections[0].name);
     }
   },
   filters: {
